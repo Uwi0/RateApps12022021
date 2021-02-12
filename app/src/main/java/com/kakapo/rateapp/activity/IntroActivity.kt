@@ -18,11 +18,19 @@ class IntroActivity : AppCompatActivity() {
         )
 
         setupBtnSignUp()
+        setupBtnSignIn()
     }
 
     private fun setupBtnSignUp(){
         btn_sign_up_intro.setOnClickListener {
             val intent = Intent(this@IntroActivity, SignUpActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun setupBtnSignIn(){
+        btn_sign_in_intro.setOnClickListener {
+            val intent = Intent(this@IntroActivity, SignInActivity::class.java)
             startActivity(intent)
         }
     }
