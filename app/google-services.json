@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "91872167575",
+    "project_id": "rateapp12022021",
+    "storage_bucket": "rateapp12022021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91872167575:android:e88f224f0118a8416a8bd2",
+        "android_client_info": {
+          "package_name": "com.kakapo.rateapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91872167575-v5avcvg3tvq1e5mmbamv44upen221u8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTEJhM4eZq1sCuIl-pzE2OR-U_9kE9mbw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91872167575-v5avcvg3tvq1e5mmbamv44upen221u8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
