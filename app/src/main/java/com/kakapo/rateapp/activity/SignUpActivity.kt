@@ -7,6 +7,8 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.kakapo.rateapp.R
+import com.kakapo.rateapp.firestore.FireStoreClass
+import com.kakapo.rateapp.model.User
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : BaseActivity() {
@@ -68,18 +70,16 @@ class SignUpActivity : BaseActivity() {
                 .getInstance()
                 .createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener{ task ->
-                    hideProgressDialog()
                     if(task.isSuccessful){
                         val firebaseUser: FirebaseUser = task.result!!.user!!
                         val registeredEmail = firebaseUser.email!!
-                        Toast.makeText(
-                            this@SignUpActivity,
-                            "$name you have successfully " +
-                                    "registered the email address $registeredEmail",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        FirebaseAuth.getInstance().signOut()
-                        finish()
+                        val user = User(
+                            firebaseUser.uid,
+                            name,
+                            registeredEmail
+                        )
+
+                        FireStoreClass().registerUser(this@SignUpActivity, user)
                     }else{
                         Toast.makeText(
                             this@SignUpActivity,
@@ -95,5 +95,16 @@ class SignUpActivity : BaseActivity() {
         btn_sign_up.setOnClickListener {
             registerUser()
         }
+    }
+
+    fun userRegisterSuccess(){
+        Toast.makeText(
+            this@SignUpActivity,
+            "Registered success",
+            Toast.LENGTH_SHORT
+        ).show()
+        hideProgressDialog()
+        FirebaseAuth.getInstance()
+        finish()
     }
 }
