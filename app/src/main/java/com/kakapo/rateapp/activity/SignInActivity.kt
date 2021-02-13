@@ -8,6 +8,8 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.kakapo.rateapp.R
+import com.kakapo.rateapp.firestore.FireStoreClass
+import com.kakapo.rateapp.model.User
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignInActivity : BaseActivity() {
@@ -70,9 +72,7 @@ class SignInActivity : BaseActivity() {
                     if(task.isSuccessful){
                         Log.d("Sign in", "sign in with email success")
 
-                        val intent =
-                            Intent(this@SignInActivity, MainActivity::class.java)
-                        startActivity(intent)
+                       FireStoreClass().sigInUser(this@SignInActivity)
                     }else{
                         Log.e("Sign in", "sign in email: failure")
                         Toast.makeText(
@@ -89,5 +89,12 @@ class SignInActivity : BaseActivity() {
         btn_sign_in.setOnClickListener {
             signInRegisteredUser()
         }
+    }
+
+    fun signInSuccess(user: User){
+        hideProgressDialog()
+        val intent = Intent(this@SignInActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
