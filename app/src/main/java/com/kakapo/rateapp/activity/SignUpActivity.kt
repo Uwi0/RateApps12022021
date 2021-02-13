@@ -40,7 +40,7 @@ class SignUpActivity : BaseActivity() {
         }
     }
 
-    private fun validateForm(name: String, email: String, password: String): Boolean{
+    private fun validateForm(name: String, email: String,nip: String, password: String): Boolean{
         return when{
             TextUtils.isEmpty(name) ->{
                 showErrorSnackBar("please enter a name")
@@ -50,8 +50,12 @@ class SignUpActivity : BaseActivity() {
                 showErrorSnackBar("please enter an email")
                 false
             }
+            TextUtils.isEmpty(nip) ->{
+                showErrorSnackBar("please enter a NIP")
+                false
+            }
             TextUtils.isEmpty(password) -> {
-                showErrorSnackBar("pleas enter a password")
+                showErrorSnackBar("please enter a password")
                 false
             }
 
@@ -62,9 +66,10 @@ class SignUpActivity : BaseActivity() {
     private fun registerUser(){
         val name: String = et_name_sign_up.text.toString().trim{it <= ' '}
         val email: String = et_email_sign_up.text.toString().trim{it <= ' '}
+        val nip: String = et_nip_sign_up.text.toString().trim{it <= ' '}
         val password: String = et_password_sign_up.text.toString().trim{it <= ' '}
 
-        if(validateForm(name, email, password)){
+        if(validateForm(name, email, nip,password)){
             showProgressDialog(resources.getString(R.string.please_wait))
             FirebaseAuth
                 .getInstance()
@@ -74,9 +79,10 @@ class SignUpActivity : BaseActivity() {
                         val firebaseUser: FirebaseUser = task.result!!.user!!
                         val registeredEmail = firebaseUser.email!!
                         val user = User(
-                            firebaseUser.uid,
-                            name,
-                            registeredEmail
+                            id = firebaseUser.uid,
+                            name = name,
+                            email = registeredEmail,
+                            nip = nip.toLong()
                         )
 
                         FireStoreClass().registerUser(this@SignUpActivity, user)

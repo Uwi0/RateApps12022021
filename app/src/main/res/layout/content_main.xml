@@ -1,19 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/layout_main_padding"
+    android:gravity="center"
+    android:background="@color/white"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_user_name"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/ib_icon_sad"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/icon_size_rate"
+            android:layout_weight="1"
+            android:src="@drawable/icon_sad_face"
+            android:background="@color/white"
+            android:contentDescription="@string/sad_face_content_main" />
+
+        <ImageButton
+            android:id="@+id/ib_icon_flat"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/icon_size_rate"
+            android:layout_weight="1"
+            android:src="@drawable/icon_flat_face"
+            android:background="@color/white"
+            android:contentDescription="@string/flat_face_content_main" />
+
+        <ImageButton
+            android:id="@+id/ib_icon_smile"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/icon_size_rate"
+            android:layout_weight="1"
+            android:src="@drawable/icon_smile_face"
+            android:background="@color/white"
+            android:contentDescription="@string/happy_face_content_main" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

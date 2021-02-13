@@ -51,4 +51,8 @@
     <dimen name="nav_image_circular_border_width">1dp</dimen>
     <dimen name="nav_divider_height">0.5dp</dimen>
 
+    <!--  content main  -->
+    <dimen name="layout_main_padding">15dp</dimen>
+    <dimen name="icon_size_rate">100dp</dimen>
+
 </resources>

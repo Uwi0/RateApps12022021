@@ -13,6 +13,7 @@
     <string name="name">Name</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="nip">NIP</string>
 
     <!--  sign in activity  -->
     <string name="sign_in_description_text">Enter your name, email id and password, to register with us.</string>
@@ -23,5 +24,8 @@
 
     <string name="nav_my_profile">My Profile</string>
     <string name="nav_sign_out">Sign Out</string>
+    <string name="sad_face_content_main">sad face</string>
+    <string name="flat_face_content_main">flat face</string>
+    <string name="happy_face_content_main">happy face</string>
 
 </resources>
