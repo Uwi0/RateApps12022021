@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import com.kakapo.rateapp.R
+import com.kakapo.rateapp.firestore.FireStoreClass
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
@@ -23,9 +24,18 @@ class SplashActivity : AppCompatActivity() {
         tv_app_name.typeface = typeFace
 
         Handler().postDelayed({
-            val intent = Intent(this@SplashActivity, IntroActivity::class.java)
-            startActivity(intent)
+
+            val currentUserID = FireStoreClass().getCurrentUserId()
+            if (currentUserID.isNotEmpty()){
+                val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                startActivity(intent)
+            }else{
+                val intent = Intent(this@SplashActivity, IntroActivity::class.java)
+                startActivity(intent)
+            }
+
             finish()
+
         }, 2500)
     }
 }
