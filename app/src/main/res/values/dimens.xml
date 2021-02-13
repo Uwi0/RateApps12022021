@@ -52,7 +52,7 @@
     <dimen name="nav_divider_height">0.5dp</dimen>
 
     <!--  content main  -->
-    <dimen name="layout_main_padding">15dp</dimen>
+    <dimen name="layout_main_padding">10dp</dimen>
     <dimen name="icon_size_rate">100dp</dimen>
 
 </resources>
