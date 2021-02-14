@@ -1,9 +1,11 @@
 package com.kakapo.rateapp.firestore
 
+import android.app.Activity
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.kakapo.rateapp.activity.MainActivity
 import com.kakapo.rateapp.activity.SignInActivity
 import com.kakapo.rateapp.activity.SignUpActivity
 import com.kakapo.rateapp.model.User
@@ -26,19 +28,41 @@ class FireStoreClass {
             }
     }
 
-    fun sigInUser(activity: SignInActivity){
-        mFireStore
-            .collection(Constants.USER)
-            .document(getCurrentUserId())
-            .get()
-            .addOnSuccessListener { document ->
-                val loggedInUser = document.toObject(User::class.java)!!
+    fun signInUser(activity: Activity) {
 
-                activity.signInSuccess(loggedInUser)
-            }
-            .addOnFailureListener { e ->
-                Log.e("signInUser function", "error writing document")
-            }
+        mFireStore.collection(Constants.USER)
+                // The document id to get the Fields of user.
+                .document(getCurrentUserId())
+                .get()
+                .addOnSuccessListener { document ->
+                    Log.e(activity.javaClass.simpleName, document.toString())
+
+                    val loggedInUser = document.toObject(User::class.java)!!
+
+                    when (activity) {
+                        is SignInActivity -> {
+                            activity.signInSuccess(loggedInUser)
+                        }
+                        is MainActivity -> {
+                            activity.updateNavigationUserDetails(loggedInUser)
+                        }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    when (activity) {
+                        is SignInActivity -> {
+                            activity.hideProgressDialog()
+                        }
+                        is MainActivity -> {
+                            activity.hideProgressDialog()
+                        }
+                    }
+                    Log.e(
+                            activity.javaClass.simpleName,
+                            "Error while getting loggedIn user details",
+                            e
+                    )
+                }
     }
 
     fun getCurrentUserId(): String{

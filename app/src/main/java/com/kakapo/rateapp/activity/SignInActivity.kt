@@ -72,7 +72,7 @@ class SignInActivity : BaseActivity() {
                     if(task.isSuccessful){
                         Log.d("Sign in", "sign in with email success")
 
-                       FireStoreClass().sigInUser(this@SignInActivity)
+                       FireStoreClass().signInUser(this@SignInActivity)
                     }else{
                         Log.e("Sign in", "sign in email: failure")
                         Toast.makeText(

@@ -3,15 +3,22 @@ package com.kakapo.rateapp.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.kakapo.rateapp.R
+import com.kakapo.rateapp.firestore.FireStoreClass
+import com.kakapo.rateapp.model.User
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +30,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setupBtnSadIcon()
         setupBtnFlatIcon()
         setupBtnSmileIcon()
+        FireStoreClass().signInUser(this@MainActivity)
     }
 
     override fun onBackPressed() {
@@ -107,6 +115,19 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     Toast.LENGTH_LONG
             ).show()
         }
+    }
+
+    fun updateNavigationUserDetails(user: User){
+        val headerView = nav_view.getHeaderView(0)
+        val navUserImage: ImageView = headerView.findViewById(R.id.iv_user_image)
+        Glide.with(this@MainActivity)
+                .load(user.image)
+                .centerCrop()
+                .placeholder(R.drawable.ic_user_place_holder)
+                .into(navUserImage)
+        val navUsername: TextView = headerView.findViewById(R.id.tv_username)
+        navUsername.text = user.name
+        Log.i("username", user.name)
     }
 
 
