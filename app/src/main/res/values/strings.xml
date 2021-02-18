@@ -3,8 +3,8 @@
 
     <!--  intro activity  -->
     <string name="image_contentDescription">image</string>
-    <string name="let_s_get_started_text">Let\'s Get started</string>
-    <string name="intro_text_description">Collaborate and Plan Together Across Multiple Devices on Projemanag’s Minimalist Interface.</string>
+    <string name="let_s_get_started_text">Lets Get started</string>
+    <string name="intro_text_description">.</string>
     <string name="sign_in">SIGN IN</string>
     <string name="sign_up">SIGN UP</string>
 
@@ -28,5 +28,10 @@
     <string name="flat_face_content_main">flat face</string>
     <string name="happy_face_content_main">happy face</string>
     <string name="convert_to_excel_nav_bar">Convert to excel</string>
+
+    <!--  Activity MyProfile  -->
+    <string name="mobile">Mobile</string>
+    <string name="update">UPDATE</string>
+    <string name="my_profile">My Profile</string>
 
 </resources>

@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.BaseActivity"/>
+        <activity
+            android:name=".activity.MyProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.BaseActivity" />
         <activity
             android:name=".activity.SignInActivity"
             android:screenOrientation="portrait"
@@ -17,8 +21,8 @@
         <activity
             android:name=".activity.SignUpActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.IntroActivity"
             android:screenOrientation="portrait"

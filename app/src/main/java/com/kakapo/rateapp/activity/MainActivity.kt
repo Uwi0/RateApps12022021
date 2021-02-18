@@ -1,7 +1,6 @@
 package com.kakapo.rateapp.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -44,11 +43,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.nav_my_profile ->{
-                Toast.makeText(
-                        this@MainActivity,
-                        "sign in",
-                        Toast.LENGTH_SHORT
-                ).show()
+                val intent = Intent(this@MainActivity, MyProfileActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.nav_print_document ->{
@@ -61,7 +57,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_sign_out ->{
                 FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this@MainActivity, IntroActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                        or Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
                 finish()
             }

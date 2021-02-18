@@ -15,32 +15,76 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/ib_icon_sad"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="@dimen/icon_size_rate"
+            android:layout_height="120dp"
             android:layout_weight="1"
-            android:src="@drawable/icon_sad_face"
-            android:background="@color/white"
-            android:contentDescription="@string/sad_face_content_main" />
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <ImageButton
-            android:id="@+id/ib_icon_flat"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/icon_size_rate"
-            android:layout_weight="1"
-            android:src="@drawable/icon_flat_face"
-            android:background="@color/white"
-            android:contentDescription="@string/flat_face_content_main" />
+            <ImageButton
+                android:id="@+id/ib_icon_sad"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:src="@drawable/icon_sad_face"
+                android:background="@color/white"
+                android:contentDescription="@string/sad_face_content_main"
+                />
 
-        <ImageButton
-            android:id="@+id/ib_icon_smile"
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="@dimen/icon_size_rate"
+            android:layout_height="120dp"
             android:layout_weight="1"
-            android:src="@drawable/icon_smile_face"
-            android:background="@color/white"
-            android:contentDescription="@string/happy_face_content_main" />
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/ib_icon_flat"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/icon_flat_face"
+                android:background="@color/white"
+                android:contentDescription="@string/flat_face_content_main" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/ib_icon_smile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/icon_smile_face"
+                android:background="@color/white"
+                android:contentDescription="@string/happy_face_content_main" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/ib_icon_smile_closed_eyes"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_smiled_closed_eyes"
+                android:background="@color/white"
+                android:contentDescription="@string/happy_face_content_main" />
+
+        </LinearLayout>
+
+
 
 
     </LinearLayout>
