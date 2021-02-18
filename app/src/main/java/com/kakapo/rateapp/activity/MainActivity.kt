@@ -29,7 +29,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setupBtnSadIcon()
         setupBtnFlatIcon()
         setupBtnSmileIcon()
-        FireStoreClass().signInUser(this@MainActivity)
+        FireStoreClass().loadUserData(this@MainActivity)
     }
 
     override fun onBackPressed() {

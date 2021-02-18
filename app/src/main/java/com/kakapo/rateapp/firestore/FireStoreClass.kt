@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.kakapo.rateapp.activity.MainActivity
+import com.kakapo.rateapp.activity.MyProfileActivity
 import com.kakapo.rateapp.activity.SignInActivity
 import com.kakapo.rateapp.activity.SignUpActivity
 import com.kakapo.rateapp.model.User
@@ -28,7 +29,7 @@ class FireStoreClass {
             }
     }
 
-    fun signInUser(activity: Activity) {
+    fun loadUserData(activity: Activity) {
 
         mFireStore.collection(Constants.USER)
                 // The document id to get the Fields of user.
@@ -45,6 +46,9 @@ class FireStoreClass {
                         }
                         is MainActivity -> {
                             activity.updateNavigationUserDetails(loggedInUser)
+                        }
+                        is MyProfileActivity ->{
+                            activity.setUserDataInUi(loggedInUser)
                         }
                     }
                 }

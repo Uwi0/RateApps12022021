@@ -1,15 +1,19 @@
 package com.kakapo.rateapp.activity
 
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.kakapo.rateapp.R
+import com.kakapo.rateapp.firestore.FireStoreClass
+import com.kakapo.rateapp.model.User
 import kotlinx.android.synthetic.main.activity_my_profile.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MyProfileActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_profile)
         setupActionBar()
+
+        FireStoreClass().loadUserData(this)
     }
 
     private fun setupActionBar(){
@@ -25,5 +29,20 @@ class MyProfileActivity : BaseActivity() {
             onBackPressed()
         }
 
+    }
+
+    fun setUserDataInUi(user: User){
+        Glide.with(this@MyProfileActivity)
+            .load(user.image)
+            .centerCrop()
+            .placeholder(R.drawable.ic_user_place_holder)
+            .into(iv_user_image)
+
+        et_name.setText(user.name)
+        et_email.setText(user.email)
+        et_nip.setText(user.nip.toString())
+        if(user.mobile != 0L){
+            et_mobile.setText(user.mobile.toString())
+        }
     }
 }
