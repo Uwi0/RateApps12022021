@@ -18,6 +18,7 @@ import com.google.firebase.storage.StorageReference
 import com.kakapo.rateapp.R
 import com.kakapo.rateapp.firestore.FireStoreClass
 import com.kakapo.rateapp.model.User
+import com.kakapo.rateapp.utils.Constants
 import kotlinx.android.synthetic.main.activity_my_profile.*
 import java.io.IOException
 
@@ -29,7 +30,8 @@ class MyProfileActivity : BaseActivity() {
     }
 
     private var mSelectedImageFileUri: Uri? = null
-    private var mProfileImageUri: String? = null
+    private var mProfileImageURL: String = ""
+    private lateinit var mUserDetails: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -148,13 +150,12 @@ class MyProfileActivity : BaseActivity() {
 
                     task.metadata!!.reference!!.downloadUrl.addOnSuccessListener { uri ->
                         Log.i("Downloadable Image URL", uri.toString())
-                        mProfileImageUri = uri.toString()
-                        hideProgressDialog()
-                        //TODO update profile data
+                        mProfileImageURL = uri.toString()
+                        updateUserProfileData()
 
                     }
                 }
-                .addOnFailureListener{ e ->
+                .addOnFailureListener{
                     Toast.makeText(
                         this@MyProfileActivity,
                         "Upload image Failed",
@@ -171,12 +172,16 @@ class MyProfileActivity : BaseActivity() {
             if(mSelectedImageFileUri != null){
                 uploadUserImage()
             }else{
-
+                showProgressDialog(resources.getString(R.string.please_wait))
+                updateUserProfileData()
             }
         }
     }
 
     fun setUserDataInUi(user: User){
+
+        mUserDetails = user
+
         Glide.with(this@MyProfileActivity)
             .load(user.image)
             .centerCrop()
@@ -189,5 +194,29 @@ class MyProfileActivity : BaseActivity() {
         if(user.mobile != 0L){
             et_mobile.setText(user.mobile.toString())
         }
+    }
+
+    fun profileUpdateSuccess(){
+        hideProgressDialog()
+        finish()
+    }
+
+    private fun updateUserProfileData(){
+        val userHashMap = HashMap<String, Any>()
+
+        if(mProfileImageURL.isNotEmpty() && mProfileImageURL != mUserDetails.image){
+            userHashMap[Constants.IMAGE] = mProfileImageURL
+        }
+
+        if (et_name.text.toString() != mUserDetails.name){
+            userHashMap[Constants.NAME] = et_name.text.toString()
+        }
+
+        if(et_mobile.text.toString() != mUserDetails.mobile.toString() &&
+            et_mobile.text.toString().isNotEmpty() ){
+            userHashMap[Constants.MOBILE] = et_mobile.text.toString().toLong()
+        }
+
+        FireStoreClass().updateUserProfileData(this, userHashMap)
     }
 }

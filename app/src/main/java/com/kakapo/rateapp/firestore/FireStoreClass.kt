@@ -2,6 +2,7 @@ package com.kakapo.rateapp.firestore
 
 import android.app.Activity
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -32,7 +33,6 @@ class FireStoreClass {
     fun loadUserData(activity: Activity) {
 
         mFireStore.collection(Constants.USER)
-                // The document id to get the Fields of user.
                 .document(getCurrentUserId())
                 .get()
                 .addOnSuccessListener { document ->
@@ -67,6 +67,37 @@ class FireStoreClass {
                             e
                     )
                 }
+    }
+
+    fun updateUserProfileData(activity: MyProfileActivity, userHashMap: HashMap<String, Any>){
+        mFireStore
+            .collection(Constants.USER)
+            .document(getCurrentUserId())
+            .update(userHashMap)
+            .addOnSuccessListener {
+                Log.i(
+                    activity.javaClass.simpleName,
+                    "Profile data updated 'updateUserProfile'"
+                )
+                Toast.makeText(
+                    activity,
+                    "Profile updated successfully",
+                    Toast.LENGTH_SHORT
+                ).show()
+                activity.profileUpdateSuccess()
+            }.addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while creating a board 'updateUserProfileData'",
+                    e
+                )
+                Toast.makeText(
+                    activity,
+                    "update profile Failed",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
     }
 
     fun getCurrentUserId(): String{
