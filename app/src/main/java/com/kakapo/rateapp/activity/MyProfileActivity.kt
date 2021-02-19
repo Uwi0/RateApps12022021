@@ -178,29 +178,6 @@ class MyProfileActivity : BaseActivity() {
         }
     }
 
-    fun setUserDataInUi(user: User){
-
-        mUserDetails = user
-
-        Glide.with(this@MyProfileActivity)
-            .load(user.image)
-            .centerCrop()
-            .placeholder(R.drawable.ic_user_place_holder)
-            .into(iv_profile_user_image)
-
-        et_name.setText(user.name)
-        et_email.setText(user.email)
-        et_nip.setText(user.nip.toString())
-        if(user.mobile != 0L){
-            et_mobile.setText(user.mobile.toString())
-        }
-    }
-
-    fun profileUpdateSuccess(){
-        hideProgressDialog()
-        finish()
-    }
-
     private fun updateUserProfileData(){
         val userHashMap = HashMap<String, Any>()
 
@@ -213,10 +190,34 @@ class MyProfileActivity : BaseActivity() {
         }
 
         if(et_mobile.text.toString() != mUserDetails.mobile.toString() &&
-            et_mobile.text.toString().isNotEmpty() ){
+                et_mobile.text.toString().isNotEmpty() ){
             userHashMap[Constants.MOBILE] = et_mobile.text.toString().toLong()
         }
 
         FireStoreClass().updateUserProfileData(this, userHashMap)
+    }
+
+    fun setUserDataInUi(user: User){
+
+        mUserDetails = user
+
+        Glide.with(this@MyProfileActivity)
+                .load(user.image)
+                .centerCrop()
+                .placeholder(R.drawable.ic_user_place_holder)
+                .into(iv_profile_user_image)
+
+        et_name.setText(user.name)
+        et_email.setText(user.email)
+        et_nip.setText(user.nip.toString())
+        if(user.mobile != 0L){
+            et_mobile.setText(user.mobile.toString())
+        }
+    }
+
+    fun profileUpdateSuccess(){
+        hideProgressDialog()
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 }
